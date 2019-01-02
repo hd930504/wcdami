@@ -51,7 +51,8 @@ export default {
       callback();
     }
     return {
-      captcha:0,
+      hide: false,
+      captcha: false,
       loginform:{
         tel:'',
         password:''
@@ -64,7 +65,7 @@ export default {
           { validator: validatePass, trigger: 'blur' }
         ],
         captcha:[
-          { validator: validateCaptcha, trigger: 'blur' }
+          { validator: validateCaptcha}
         ]
       }
     }
@@ -73,43 +74,45 @@ export default {
     submitForm(formName){
       this.$refs[formName].validate((valid) => {
         if (valid && this.captcha) {
-          this.axios.post('/api/register',{
-            tel:this.loginform.tel,
-            password:this.$md5(this.loginform.password)
-          }).then((data)=>{
-          })
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
+            this.axios.post('/api/register',{
+              tel:this.loginform.tel,
+              password:this.$md5(this.loginform.password)
+            }).then((data)=>{
+              if(data.data.code !== 0){
+                  this.$message.warning(data.data.msg);
+                }else{
+                  this.hide = true;
+                }
+            })
+          } else {
+            return false;
+          }
       });
       
     }
   },
   created() {
         this.axios.get("/api/gt/register").then((data)=>{
-        console.log(data)
-        window.initGeetest({
-            // 以下配置参数来自服务端 SDK
-            gt: data.data.gt,
-            challenge: data.data.challenge,
-            offline: !data.data.success,
-            new_captcha: true,
-            product: 'float',
-            width:'100%'
-        }, function (captchaObj) {
-            captchaObj.appendTo("#captchaBox"); //将验证按钮插入到宿主页面中captchaBox元素内
-            captchaObj.onReady(function(){
-              //your code
-            }).onSuccess(function(){
-              this.captcha = 1
-            }).onError(function(){
-              this.captcha = 0
-            })
-        })
-      }) 
-  },
-  mounted() {
+          let _this = this
+          window.initGeetest({
+              // 以下配置参数来自服务端 SDK
+              gt: data.data.gt,
+              challenge: data.data.challenge,
+              offline: !data.data.success,
+              new_captcha: true,
+              product: 'float',
+              width:'100%'
+          }, function (captchaObj) {
+              captchaObj.appendTo("#captchaBox"); //将验证按钮插入到宿主页面中captchaBox元素内
+              captchaObj.onReady(function(){
+              }).onSuccess(function(){                
+                _this.captcha = true
+              }).onError(function(){
+                alert()
+                _this.captcha = false
+              })
+          })
+        }) 
   }
 }
 </script>
