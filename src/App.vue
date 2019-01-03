@@ -4,7 +4,9 @@
       <el-header height="130px">
         <headComponent></headComponent>
       </el-header>
-      <el-main></el-main>
+      <el-main>
+        <banner/>
+      </el-main>
       <el-footer></el-footer>
     </el-container>    
     <div v-if="show">
@@ -18,11 +20,13 @@
 import login from './components/login.vue';
 import register from './components/register.vue';
 import headComponent from './components/header.vue';
+import banner from './components/banner';
 
 export default {
   name: 'app',
-  components: {
+  components: {    
     headComponent,
+    banner,
     login,
     register
   },

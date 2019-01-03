@@ -8,6 +8,11 @@
     </el-form-item>   
     <el-form-item prop="captcha">
       <div id="captchaBox"></div>
+      <div class="geetest_form">
+          <input type="hidden" name="geetest_challenge" value="xxx">
+          <input type="hidden" name="geetest_validate" value="xxx">
+          <input type="hidden" name="geetest_seccode" value="xxx">
+      </div>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('loginform')">注册</el-button>
@@ -34,7 +39,7 @@ export default {
     }
 
     let validatePass = (rule, value, callback)=>{
-      const passrule = /^\d{6,20}$/;
+      const passrule = /^(\w){6,20}$/;
       if(value === ''){
         return callback(new Error('请输入密码'));
       }
@@ -107,6 +112,8 @@ export default {
               captchaObj.onReady(function(){
               }).onSuccess(function(){                
                 _this.captcha = true
+                var result = captchaObj.getValidate();
+                console.log(result)
               }).onError(function(){
                 alert()
                 _this.captcha = false

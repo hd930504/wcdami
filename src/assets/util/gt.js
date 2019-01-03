@@ -13,6 +13,7 @@ if (typeof module === "object" && typeof module.exports === "object") {
 } else {
     factory(global);
 }
+// eslint-disable-next-line no-unused-vars
 })(typeof window !== "undefined" ? window : this, function (window, noGlobal) {
 "use strict";
 if (typeof window === 'undefined') {
@@ -208,7 +209,9 @@ var jsonp = function (domains, path, config, callback) {
         window[cb] = undefined;
         try {
             delete window[cb];
+        // eslint-disable-next-line no-empty
         } catch (e) {
+
         }
     };
     load(config.protocol, domains, path, {
@@ -300,7 +303,9 @@ window.initGeetest = function (userConfig, callback) {
         }
     });
 };
+// eslint-disable-next-line no-undef
 window.initGeetest = initGeetest;
+  // eslint-disable-next-line no-undef
   return initGeetest;
 });
 
