@@ -2,16 +2,16 @@
   <div id="app">
     <el-container>
       <el-header height="130px">
-        <headComponent></headComponent>
+        <headComponent v-on:login="showState"></headComponent>
       </el-header>
       <el-main>
         <banner/>
       </el-main>
       <el-footer></el-footer>
     </el-container>    
-    <div v-if="show">
-      <login v-on:userInfo="showState"></login>
-      <register/>
+    <div>
+      <login v-if="loginDialog"></login>
+      <register v-if="registerDialog"></register>
     </div>    
   </div>
 </template>
@@ -34,13 +34,22 @@ export default {
     
     return {
       show:false,
-      user:''
+      loginDialog: false,
+      registerDialog:false,
     }
   },
   methods: {
     showState(data){
-      this.show = data.showState;
-      this.user = data.user
+      console.log(data)
+      if(data.type){
+        if(data.type == 1){
+          this.loginDialog = data.showState;
+          this.registerDialog = false;
+        }else{
+          this.loginDialog = false;
+          this.registerDialog = data.showState;
+        }
+      }
     }
   },
 }

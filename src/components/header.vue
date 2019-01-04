@@ -3,9 +3,11 @@
         <div class="header-top">
             <div class="header-top-main">
                 <div class="user-operation">
-                    <span v-if="false">韩东</span>
-                    <span>登录</span>
-                    <span>注册</span>
+                    <span v-if="admin">{{admin}}</span>
+                    <template v-else>
+                        <span v-on:click="login('login')">登录</span>
+                        <span v-on:click="login('register')">注册</span>
+                    </template>
                     <span>我的订单</span>
                     <span>会员中心</span>
                 </div>
@@ -32,6 +34,21 @@
 <script>
 export default {
     name: 'headComponent',
+    data() {
+        return {
+            admin:'',
+        }
+    },
+    methods: {
+        login(type){
+            if(type == 'login'){
+                this.$emit('login', {showState:true,type:1})
+            }else{
+                this.$emit('login', {showState:true,type:2})
+            }
+            
+        }
+    },
 }
 </script>
 
