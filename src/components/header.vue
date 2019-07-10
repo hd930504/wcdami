@@ -53,6 +53,9 @@ export default {
 </script>
 
 <style scoped>
+    .header{
+        background: #fff;
+    }
     .header-top{
         height: 30px;
         background-color: #49a559;
