@@ -40,6 +40,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+<<<<<<< HEAD
   background: #f9f9f9;
 }
 .el-main{
@@ -48,5 +49,8 @@ export default {
 }
 .el-header{
   background: #fff;
+=======
+  background-color: #f9f9f9;
+>>>>>>> c21a302a4c5effcf68f476d0fef19d83db950a37
 }
 </style>
