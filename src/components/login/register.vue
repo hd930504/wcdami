@@ -3,9 +3,9 @@
     <el-form-item prop="tel">
       <el-input v-model="loginform.tel" placeholder="手机号" autocomplete="off"></el-input>
     </el-form-item>  
-    <el-form-item prop="password">
+    <!-- <el-form-item prop="password">
       <el-input type="password" v-model="loginform.password" placeholder="密码" autocomplete="off"></el-input>
-    </el-form-item>   
+    </el-form-item>    -->
     <el-form-item prop="captcha">
       <div id="captchaBox"></div>
       <div class="geetest_form">
@@ -23,9 +23,6 @@
 <script>
 export default {
   name: 'register',
-  props: {
-    msg: String
-  },
   data() {
     let validatetel = (rule, value, callback)=>{
       const telrule = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
@@ -38,16 +35,16 @@ export default {
       callback();
     }
 
-    let validatePass = (rule, value, callback)=>{
-      const passrule = /^(\w){6,20}$/;
-      if(value === ''){
-        return callback(new Error('请输入密码'));
-      }
-      if(!value.match(passrule)){
-        return callback(new Error('请输入6-20位密码'));
-      }
-      callback();
-    }
+    // let validatePass = (rule, value, callback)=>{
+    //   const passrule = /^(\w){6,20}$/;
+    //   if(value === ''){
+    //     return callback(new Error('请输入密码'));
+    //   }
+    //   if(!value.match(passrule)){
+    //     return callback(new Error('请输入6-20位密码'));
+    //   }
+    //   callback();
+    // }
 
     let validateCaptcha = (rule, value, callback)=>{
       if(!this.captcha){
@@ -56,7 +53,6 @@ export default {
       callback();
     }
     return {
-      hide: false,
       captcha: false,
       loginform:{
         tel:'',
@@ -66,9 +62,9 @@ export default {
         tel:[
           { validator: validatetel, trigger: 'blur' }
         ],
-        password:[
-          { validator: validatePass, trigger: 'blur' }
-        ],
+        // password:[
+        //   { validator: validatePass, trigger: 'blur' }
+        // ],
         captcha:[
           { validator: validateCaptcha}
         ]
@@ -113,9 +109,7 @@ export default {
               }).onSuccess(function(){                
                 _this.captcha = true
                 var result = captchaObj.getValidate();
-                console.log(result)
               }).onError(function(){
-                alert()
                 _this.captcha = false
               })
           })

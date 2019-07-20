@@ -6,6 +6,7 @@ import ElementUI from 'element-ui'
 import gtInit from './assets/util/gt'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/style/style.css'
+import router from './router'
 
 Vue.prototype.gtInit = gtInit
 Vue.prototype.axios = axios
@@ -15,4 +16,5 @@ Vue.use(ElementUI);
 
 new Vue({
   render: h => h(App),
+  router
 }).$mount('#app')

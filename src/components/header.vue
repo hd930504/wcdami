@@ -5,8 +5,8 @@
                 <div class="user-operation">
                     <span v-if="admin">{{admin}}</span>
                     <template v-else>
-                        <span v-on:click="login('login')">登录</span>
-                        <span v-on:click="login('register')">注册</span>
+                        <router-link tag="span" to="/login">登录</router-link>
+                        <router-link tag="span" to="/register">注册</router-link>
                     </template>
                     <span>我的订单</span>
                     <span>会员中心</span>
@@ -21,8 +21,8 @@
                     购物车<span>0</span>件
                 </div>
                 <ul class="nav">
-                    <li>首页</li>
-                    <li>产品列表</li>
+                    <router-link tag="li" to="/">首页</router-link>
+                    <router-link tag="li" to="/goodsList">产品列表</router-link>
                     <li>大米知识</li>
                     <li>关于我们</li>
                 </ul>                

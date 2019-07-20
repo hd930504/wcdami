@@ -2,55 +2,32 @@
   <div id="app">
     <el-container>
       <el-header height="130px">
-        <headComponent v-on:login="showState"></headComponent>
+        <headComponent></headComponent>
       </el-header>
       <el-main>
-        <banner/>
+        <router-view></router-view>
       </el-main>
       <el-footer></el-footer>
-    </el-container>    
-    <div>
-      <login v-if="loginDialog"></login>
-      <register v-if="registerDialog"></register>
-    </div>    
+    </el-container>      
   </div>
 </template>
 
 <script>
-import login from './components/login.vue';
-import register from './components/register.vue';
 import headComponent from './components/header.vue';
-import banner from './components/banner';
-
+import home from './components/home/home.vue';
 export default {
   name: 'app',
   components: {    
-    headComponent,
-    banner,
-    login,
-    register
+    headComponent
   },
   data() {
     
     return {
-      show:false,
-      loginDialog: false,
-      registerDialog:false,
+      show:false
     }
   },
   methods: {
-    showState(data){
-      console.log(data)
-      if(data.type){
-        if(data.type == 1){
-          this.loginDialog = data.showState;
-          this.registerDialog = false;
-        }else{
-          this.loginDialog = false;
-          this.registerDialog = data.showState;
-        }
-      }
-    }
+    
   },
 }
 </script>
@@ -63,6 +40,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: #f9f9f9;
 }
-
+.el-main{
+  width: 1200px;
+  margin: 0 auto;
+}
+.el-header{
+  background: #fff;
+}
 </style>

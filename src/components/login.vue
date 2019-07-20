@@ -78,7 +78,6 @@ export default {
               this.$message.error(data.data.msg);
             }else{
               this.hide = true;
-              this.$emit('userInfo', {user:this.loginform.tel,showState:false})
             }
           })
         } else {
